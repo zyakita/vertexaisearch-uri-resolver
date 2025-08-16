@@ -8,6 +8,16 @@ const bodyParser = require('koa-bodyparser');
 const app = new Koa();
 const router = new Router();
 
+// CORS configuration
+// Set ORIGINS environment variable to allow specific domains (comma-separated)
+// Example: ORIGINS=example.com,abc.com,localhost:3000
+// If not set, defaults to allowing all origins (*)
+const corsOptions = {
+  origin: process.env.ORIGINS 
+    ? process.env.ORIGINS.split(',').map(origin => origin.trim())
+    : '*'
+};
+
 router
   .get('/', (ctx) => {
     ctx.body = 'Hello!';
@@ -41,7 +51,7 @@ router
   })
 
 app
-  .use(cors())
+  .use(cors(corsOptions))
   .use(bodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
