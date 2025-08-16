@@ -10,12 +10,25 @@ const router = new Router();
 
 // CORS configuration
 // Set ORIGINS environment variable to allow specific domains (comma-separated)
-// Example: ORIGINS=example.com,abc.com,localhost:3000
+// Example: ORIGINS=https://example.com,https://abc.com,http://localhost:5173
 // If not set, defaults to allowing all origins (*)
 const corsOptions = {
-  origin: process.env.ORIGINS 
-    ? process.env.ORIGINS.split(',').map(origin => origin.trim())
-    : '*'
+  origin: (ctx) => {
+    const requestOrigin = ctx.request.header.origin;
+
+    if (!process.env.ORIGINS) {
+      return '*';
+    }
+
+    const allowedOrigins = process.env.ORIGINS.split(',').map(origin => origin.trim());
+
+    // Check if the request origin is in the allowed list
+    if (allowedOrigins.includes(requestOrigin)) {
+      return requestOrigin; // Return only the matching origin
+    }
+
+    return false; // Reject the request
+  }
 };
 
 router
