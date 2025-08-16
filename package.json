@@ -1,0 +1,17 @@
+{
+  "name": "vertexaisearch-uri-resolver",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:zyakita/vertexaisearch-uri-resolver.git",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "^5.0.0 <6.0.0",
+    "@koa/router": "^14.0.0 <15.0.0",
+    "dotenv": "^17.2.1 <18.0.0",
+    "koa": "^3.0.1 <4.0.0",
+    "koa-bodyparser": "^4.4.1 <5.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
