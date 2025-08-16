@@ -1,0 +1,1 @@
+# vertexaisearch-uri-resolver
